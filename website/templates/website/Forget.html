@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Uranus Signup</title>
+    <style>
+        body {
+            font-family: "proxima-nova", "proxima nova", "helvetica neue", "helvetica", "arial", sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" media="screen" href="{% static 'css/reset/Forget.css' %}" />
+</head>
+<body class='login'>
+    <div class="bui-Container">
+        <img class="logo" height="50" src="{% static 'img/icon/uranuslogo.svg' %}" alt="Uranus logo" />
+        <form class="vertical-form sign-in" id="new_user" action="{% url 'E_Forget' %}" accept-charset="UTF-8" method="post">
+            {% csrf_token %}
+            <legend>
+                Reset Password
+            </legend>
+            {% for error in errors %}
+            <p style="color:yellow;font-weight:bold;">{{error}}</p>
+            {%endfor%}
+            <input type="email" placeholder="Email Address" label="false" spellcheck="false" class="is-sensitive" value="" name="email" id="user_email" required="required" />
+            <input type="text" placeholder="Username" label="false" spellcheck="false" class="is-sensitive" value="" name="usrName" id="user_name" required="required" />
+            <input placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="new_password" id="user_password"  required="required"/>
+            <input placeholder="Retype Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="re_new_password" id="user_repassword" required="required" />
+            <input type="submit" name="commit" value="Reset" />
+        </form>
+        <div class='footer'>
+            <p>
+                Still have problems?
+                <a href="{% url 'Login' %}">Contact Developers</a>
+            </p>
+            <p>you must login by the link in the verifying E-mail to avtivate your new password</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,341 @@
+﻿<!doctype html>
+{% load static %}
+<head>
+    <title></title>
+    <meta charset=utf-8>
+    <meta http-equiv=x-ua-compatible content="ie=edge">
+    <meta name=viewport content="width=device-width, initial-scale=1.0" />
+    <meta name=description content="">
+    <link href="{% static 'css/site-7c6faa7b.css' %}" rel=stylesheet />
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loading").attr("style", "display:none;opacity:block");
+            $("#homepage").attr("style", "display:block")
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mobile-menu").click(function () {
+                if (document.getElementById("mobile-dropdown").style.display == "none") {
+                    document.getElementById("mobile-dropdown").style.display = "block";
+                    $("#mobile-menu").addClass("is-active")
+                }
+                else {
+                    document.getElementById("mobile-dropdown").style.display = "none";
+                    $("#mobile-menu").removeClass("is-active")
+                }
+            })
+        })
+    </script>
+</head>
+<div id="loading" style="display:block; opacity: 1;">
+    <div id="preloader" style="opacity: 1;">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<div class="index bui js-disabled" id="homepage" style="display:none">
+    <div class="SiteFrame">
+        <header class=GlobalMobileHeader role=banner>
+            <div class=GlobalMobileHeader-container>
+                <a href="{% url 'MainPage' %}" class=GlobalMobileHeader-spaceRight>
+                    <svg width=30 height=29 xmlns="http://www.w3.org/2000/svg">
+                        <title>Uranus home</title>
+                        <img fill-rule=evenodd src="{% static 'img/icon/uranus.svg' %}">
+                    </svg>
+                </a>
+                <button class="bui-Button--reset GlobalMobileHeader-toggle" type=button aria-label="Toggle navigation" id="mobile-menu">
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                </button>
+            </div>
+            <nav class=GlobalMobileHeader-list role=navigation id="mobile-dropdown" style="transform:matrix(1,0,0,1,0,0);opacity:1;display:none">
+                <ul style="opacity:1;transform:matrix(1,0,0,1,0,0)">
+                    <li>
+                        <a href="#" class=GlobalMobileHeader-link>Game Speeder</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Pictures Search</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Ssr' %}" class=GlobalMobileHeader-link>Proxy Service</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Community</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Lollipop</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Contact Support</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Login' %}" class=GlobalMobileHeader-link>Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Register' %}" class=GlobalMobileHeader-link>Sign Up</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main class="SiteFrame-body" role="main">
+            <div class=bui-u-overflowHidden>
+                <header class="GraphicalHero GraphicalHero--spaces">
+                    <div class=bui-Container>
+                        <div class=GraphicalHero-artwork>
+                            <img src="{% static 'img/source/speeder1.svg' %}" alt="" />
+                        </div>
+                        <div class=bui-GridContainer>
+                            <div class="bui-Col-6@medium bui-u-pb--xlarge">
+                                <h1 class=Text--xxlarge>Flexible &simple speeder &nbsp; </h1>
+                                <!--文案修改处-->                      <p class="Text--regular Text--regular--light bui-u-mb--large bui-u-pr--large">Securely store and deliver any amount of data to end-users and applications, with the same simplicity you've come to expect from us. Instantaneously create cost-effective, reliable storage space using our drag-and-drop UI &nbsp;or &nbsp;API. </p>
+                                <div class=bui-Inline>
+                                    <a href="" class="bui-Button bui-Button--primary bui-Button--space">Try it for now with discount</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <section class="bui-Section bui-u-pb--remove">
+                    <div class=bui-Container>
+                        <div class="bui-GridContainer bui-GridContainer-largeGutter@medium">
+                            <h2 class="Text--large bui-u-textCenter">Why Us?</h2>
+                            <div class="bui-Col bui-Col-4@medium bui-u-textCenter">
+                                <!--文案修改处-->                <img src="{% static 'img/icon/route.svg' %}" alt="" />
+                                <h3 class=Text--smallish>CN2 Advanced Route</h3>
+                                <p>We've simplified the essentials of object storage to save you time. Simply name your Space and tap Create, and you're ready to go in &nbsp;seconds. </p>
+                            </div>
+                            <div class="bui-Col bui-Col-4@medium bui-u-textCenter">
+                                <img src="{% static 'img/icon/money.svg' %}" alt="" />
+                                <h3 class=Text--smallish>Lower Price Than Most speeders</h3>
+                                <p>Ideas are meant to evolve and expand, not conform to storage limitations. Spaces provides scalable storage so your projects always have room to &nbsp;grow. </p>
+                            </div>
+                            <div class="bui-Col bui-Col-4@medium bui-u-textCenter">
+                                <img src="{% static 'img/icon/rgb.svg' %}" alt="" />
+                                <h3 class=Text--smallish>Flexible plans to choose</h3>
+                                <p>Combine Spaces with other DigitalOcean products or use it as a standalone service, whichever suits your &nbsp;needs. </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class=bui-Section>
+                <div class=bui-Container>
+                    <div class="bui-GridContainer bui-GridContainer-largeGutter@medium bui-u-flexMiddle bui-u-flexSpaceBetween">
+                        <div class="bui-Col bui-Col-6@medium">
+                            <div class="SectionIcon SectionIcon--small SectionIcon--left">
+                                <img src="{% static 'img/icon/wings.svg' %}" alt="" class=SpacesHeadingIcon />
+                            </div>
+                            <h2 class=Text--large>Affordable and predictable pricing </h2>
+                            <!--文案修改处-->             <p>Pricing starts at $5 per month and includes 250 GB of storage and 1 TB of outbound data transferred per month. </p>
+                            <p>Additional storage is just $0.02 per GB stored, and additional bandwidth at $0.01 per GB of data transferred. Uploads to Spaces are &nbsp;free. </p>
+                        </div>
+                        <div class="bui-Col bui-Col-5@medium">
+                            <article class=SpacesPricingWidget>
+                                <div class=SpacesPricingWidget-header>
+                                    <p class=Text--large>$5 per month </p>
+                                </div>
+                                <div class=SpacesPricingWidget-body>
+                                    <ul class="SpacesPricingWidget-list CheckedList">
+                                        <li class=CheckedList-item>
+                                            <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            250 GB of storage
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            1 TB of outbound transfer
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            $0.02 per additional GB stored
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            $0.01 per additional GB transferred
+                                        </li>
+                                    </ul>
+                                    <a href="" class="bui-Button bui-Button--primary">Try free for 2 months</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=bui-Section>
+                <div class=bui-Container>
+                    <div class="bui-GridContainer bui-GridContainer-largeGutter@medium bui-u-flexMiddle bui-u-flexSpaceBetween">
+                        <div class="bui-Col bui-Col-6@medium">
+                            <div class="SectionIcon SectionIcon--small SectionIcon--left">
+                                <img src="{% static 'img/icon/butterfly.svg' %}" alt="" class=SpacesHeadingIcon />
+                            </div>
+                            <!--文案修改处-->                        <h2 class=Text--large>Affordable and predictable pricing </h2>
+                            <p>Pricing starts at $5 per month and includes 250 GB of storage and 1 TB of outbound data transferred per month. </p>
+                            <p>Additional storage is just $0.02 per GB stored, and additional bandwidth at $0.01 per GB of data transferred. Uploads to Spaces are &nbsp;free. </p>
+                        </div>
+                        <div class="bui-Col bui-Col-5@medium">
+                            <article class=SpacesPricingWidget>
+                                <div class=SpacesPricingWidget-header>
+                                    <p class=Text--large>$5 per month </p>
+                                </div>
+                                <div class=SpacesPricingWidget-body>
+                                    <ul class="SpacesPricingWidget-list CheckedList">
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            250 GB of storage
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            1 TB of outbound transfer
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.02 per additional GB stored
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.01 per additional GB transferred
+                                        </li>
+                                    </ul>
+                                    <a href="" class="bui-Button bui-Button--primary">Try free for 2 months</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=bui-Section>
+                <div class=bui-Container>
+                    <div class="bui-GridContainer bui-GridContainer-largeGutter@medium bui-u-flexMiddle bui-u-flexSpaceBetween">
+                        <div class="bui-Col bui-Col-6@medium">
+                            <div class="SectionIcon SectionIcon--small SectionIcon--left">
+                                <img src="{% static 'img/icon/tuxedo.svg' %}" alt="" class=SpacesHeadingIcon data-src="/assets/media/products/spaces/icons/affordable-pricing-1090ea55.svg" />
+                            </div>
+                            <h2 class=Text--large>Affordable and predictable pricing </h2>
+                            <p>Pricing starts at $5 per month and includes 250 GB of storage and 1 TB of outbound data transferred per month. </p>
+                            <p>Additional storage is just $0.02 per GB stored, and additional bandwidth at $0.01 per GB of data transferred. Uploads to Spaces are &nbsp;free. </p>
+                        </div>
+                        <div class="bui-Col bui-Col-5@medium">
+                            <article class=SpacesPricingWidget>
+                                <div class=SpacesPricingWidget-header>
+                                    <p class=Text--large>$5 per month </p>
+                                </div>
+                                <div class=SpacesPricingWidget-body>
+                                    <ul class="SpacesPricingWidget-list CheckedList">
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            250 GB of storage
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            1 TB of outbound transfer
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.02 per additional GB stored
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.01 per additional GB transferred
+                                        </li>
+                                    </ul>
+                                    <a href="" class="bui-Button bui-Button--primary">Try free for 2 months</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=bui-Section>
+                <div class=bui-Container>
+                    <div class="bui-GridContainer bui-GridContainer-largeGutter@medium bui-u-flexMiddle bui-u-flexSpaceBetween">
+                        <div class="bui-Col bui-Col-6@medium">
+                            <div class="SectionIcon SectionIcon--small SectionIcon--left">
+                                <img src="{% static 'img/icon/share.svg' %}" alt="" class=SpacesHeadingIcon />
+                            </div>
+                            <h2 class=Text--large>Affordable and predictable pricing </h2>
+                            <p>Pricing starts at $5 per month and includes 250 GB of storage and 1 TB of outbound data transferred per month. </p>
+                            <p>Additional storage is just $0.02 per GB stored, and additional bandwidth at $0.01 per GB of data transferred. Uploads to Spaces are &nbsp;free. </p>
+                        </div>
+                        <div class="bui-Col bui-Col-5@medium">
+                            <article class=SpacesPricingWidget>
+                                <div class=SpacesPricingWidget-header>
+                                    <p class=Text--large>$5 per month </p>
+                                </div>
+                                <div class=SpacesPricingWidget-body>
+                                    <ul class="SpacesPricingWidget-list CheckedList">
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            250 GB of storage
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            1 TB of outbound transfer
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.02 per additional GB stored
+                                        </li>
+                                        <li class=CheckedList-item>
+                                            <svg class="Icon CheckedList-icon">
+                                                <img class="Icon CheckedList-icon" src="{% static 'img/icon/checked.svg' %}">
+                                            </svg>
+                                            $0.01 per additional GB transferred
+                                        </li>
+                                    </ul>
+                                    <a href="" class="bui-Button bui-Button--primary">Try free for 2 months</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class="FooterCTA-container bui-u-mt--large"> <div class="bui-Container"> <div class="FooterCTA FooterCTA--slim"> <div class="FooterCTA-content"> <p class="Text--large bui-u-mb--remove"> Have questions before you deploy? </p> <p class="Text--regular bui-u-mt--small bui-u-mv--remove"> Contact our Customer Success team to get answers. </p> </div> <div class="FooterCTA-actions"> <a class="bui-Button bui-Button--primary bui-Button--withIconRight" href="{% url 'MainPage' %}"> Contact Us <svg xmlns="http://www.w3.org/2000/svg" class="bui-Icon" aria-hidden="true"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right" /> </svg> </a> </div> </div> </div> </section>
+        </main>
+        <div class="bui SiteFrame-footer">
+            <footer class="GlobalFooter">
+                <div class="bui-Container">
+                    <h5 class="bui-u-mb--xlarge bui-u-textCenter LineLength LineLength--normal-big footer-text">
+                        Do somthing big with Team Uranus
+                    </h5>
+                    <a href="#"></a>
+                    <a href="#"></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <symbol viewBox="0 0 32 32" id=arrow-right xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.448 14.784L10.048.96c-.64-.64-1.856-.64-2.496 0-.32.32-.512.768-.512 1.28 0 .448.192.896.512 1.216l13.12 12.608-13.12 12.608c-.32.32-.512.704-.512 1.152 0 .32.128.64.448 1.088l.064.128c.32.32.768.512 1.216.512s.896-.192 1.216-.512L24.32 17.28c.32-.32.512-.768.512-1.216s-.064-.96-.384-1.28z" />
+            </symbol>
+        </svg>
+    </div>
+</div>

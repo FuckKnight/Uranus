@@ -1,0 +1,375 @@
+﻿<!doctype html>
+{% laod static %}
+<head>
+    <title></title>
+    <meta charset=utf-8>
+    <meta http-equiv=x-ua-compatible content="ie=edge">
+    <meta name=viewport content="width=device-width, initial-scale=1.0" />
+    <meta name=description content="">
+    <link href="{% static 'css/site-7c6faa7b.css' %}" rel=stylesheet />
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#loading").attr("style", "display:none;opacity:block");
+            $("#homepage").attr("style", "display:block")
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mobile-menu").click(function () {
+                if (document.getElementById("mobile-dropdown").style.display == "none") {
+                    document.getElementById("mobile-dropdown").style.display = "block";
+                    $("#mobile-menu").addClass("is-active")
+                }
+                else {
+                    document.getElementById("mobile-dropdown").style.display = "none";
+                    $("#mobile-menu").removeClass("is-active")
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#a1").click(function () {
+                        $("#pj1").attr("class", "bui-Tabs-listItem is-active");
+                        $("#pj2").attr("class", "bui-Tabs-listItem");
+                        $("#pj3").attr("class", "bui-Tabs-listItem");
+                        $("#pj4").attr("class", "bui-Tabs-listItem");
+                        $("#pj5").attr("class", "bui-Tabs-listItem");
+                        $("#ct1").attr("class", "bui-Tabs-pane is-active");
+                        $("#ct2").attr("class", "bui-Tabs-pane");
+                        $("#ct3").attr("class", "bui-Tabs-pane");
+                        $("#ct4").attr("class", "bui-Tabs-pane");
+                        $("#ct5").attr("class", "bui-Tabs-pane");
+                    });
+                    $("#a2").click(function () {
+                        $("#pj2").attr("class", "bui-Tabs-listItem is-active");
+                        $("#pj1").attr("class", "bui-Tabs-listItem");
+                        $("#pj3").attr("class", "bui-Tabs-listItem");
+                        $("#pj4").attr("class", "bui-Tabs-listItem");
+                        $("#pj5").attr("class", "bui-Tabs-listItem");
+                        $("#ct2").attr("class", "bui-Tabs-pane is-active");
+                        $("#ct1").attr("class", "bui-Tabs-pane");
+                        $("#ct3").attr("class", "bui-Tabs-pane");
+                        $("#ct4").attr("class", "bui-Tabs-pane");
+                        $("#ct5").attr("class", "bui-Tabs-pane");
+                    });
+                    $("#a3").click(function () {
+                        $("#pj3").attr("class", "bui-Tabs-listItem is-active");
+                        $("#pj2").attr("class", "bui-Tabs-listItem");
+                        $("#pj1").attr("class", "bui-Tabs-listItem");
+                        $("#pj4").attr("class", "bui-Tabs-listItem");
+                        $("#pj5").attr("class", "bui-Tabs-listItem");
+                        $("#ct3").attr("class", "bui-Tabs-pane is-active");
+                        $("#ct2").attr("class", "bui-Tabs-pane");
+                        $("#ct1").attr("class", "bui-Tabs-pane");
+                        $("#ct4").attr("class", "bui-Tabs-pane");
+                        $("#ct5").attr("class", "bui-Tabs-pane");
+                    });
+                    $("#a4").click(function () {
+                        $("#pj4").attr("class", "bui-Tabs-listItem is-active");
+                        $("#pj2").attr("class", "bui-Tabs-listItem");
+                        $("#pj3").attr("class", "bui-Tabs-listItem");
+                        $("#pj1").attr("class", "bui-Tabs-listItem");
+                        $("#pj5").attr("class", "bui-Tabs-listItem");
+                        $("#ct4").attr("class", "bui-Tabs-pane is-active");
+                        $("#ct2").attr("class", "bui-Tabs-pane");
+                        $("#ct3").attr("class", "bui-Tabs-pane");
+                        $("#ct1").attr("class", "bui-Tabs-pane");
+                        $("#ct5").attr("class", "bui-Tabs-pane");
+                    });
+                    $("#a5").click(function () {
+                        $("#pj5").attr("class", "bui-Tabs-listItem is-active");
+                        $("#pj2").attr("class", "bui-Tabs-listItem");
+                        $("#pj3").attr("class", "bui-Tabs-listItem");
+                        $("#pj4").attr("class", "bui-Tabs-listItem");
+                        $("#pj1").attr("class", "bui-Tabs-listItem");
+                        $("#ct5").attr("class", "bui-Tabs-pane is-active");
+                        $("#ct2").attr("class", "bui-Tabs-pane");
+                        $("#ct3").attr("class", "bui-Tabs-pane");
+                        $("#ct4").attr("class", "bui-Tabs-pane");
+                        $("#ct1").attr("class", "bui-Tabs-pane");
+                    })
+                })
+    </script>
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#close").click(function (ev1) {
+                        ev1.stopPropagation;
+                        $("#discount").attr("style", "display:none")
+                    });
+                    $("#link").click(function () {
+                        window.location = "product-gamespeeder.html"
+                    })
+                })
+    </script>
+</head>
+<div id="loading" style="display:block; opacity: 1;">
+    <div id="preloader" style="opacity: 1;">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<div class="index bui js-disabled" id="homepage" style="display:none">
+    <a href="#" class="bui-Banner bui-AnnouncementBanner" data-home-announcement data-home-announcement-cookie=alert_droplets_jan_2018 id="discount">
+        <div class=bui-Banner-content>
+            <span class="bui-Pill bui-Pill--new bui-u-mr--small">Discount</span>
+            <p data-home-announcement-message>
+                New <strong>Game Speeder plans</strong>
+                :lower delay,and lower price for new users. <strong id="link">Learn &nbsp;more</strong>
+                .
+            </p>
+        </div>
+        <button class="bui-Button--reset bui-Banner-close" type=button data-bui-banner-close id="close">
+            <svg class="bui-Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve" width="12px" height="12px">
+<g id="Close">
+            <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312   c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312   l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937   c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z" fill="#FFDA44" />
+
+
+
+</g>
+</svg>
+        </button>
+    </a>
+    <div class="SiteFrame">
+        <header class=GlobalMobileHeader role=banner>
+            <div class=GlobalMobileHeader-container>
+                <a href="{'MainPage'}" class=GlobalMobileHeader-spaceRight>
+                    <svg width=30 height=29 xmlns="http://www.w3.org/2000/svg">
+                        <title>Uranus home</title>
+                        <img fill-rule=evenodd src="{% static 'img/icon/uranus.svg' %}">
+                    </svg>
+                </a>
+                <button class="bui-Button--reset GlobalMobileHeader-toggle" type=button aria-label="Toggle navigation" id="mobile-menu">
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                    <span class=GlobalMobileHeader-toggleLine></span>
+                </button>
+            </div>
+            <nav class=GlobalMobileHeader-list role=navigation id="mobile-dropdown" style="transform:matrix(1,0,0,1,0,0);opacity:1;display:none">
+                <ul style="opacity:1;transform:matrix(1,0,0,1,0,0)">
+                    <li>
+                        <a href="{% url 'MobileGameSpeeder' %}" class=GlobalMobileHeader-link>Game Speeder</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Pictures Search</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'MobileSsr' %}" class=GlobalMobileHeader-link>Proxy Service</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Community</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Lollipop</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Wait' %}" class=GlobalMobileHeader-link>Contact Support</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Login' %}" class=GlobalMobileHeader-link>Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Register' %}" class=GlobalMobileHeader-link>Sign Up</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main class="SiteFrame-body" role="main">
+            <header class="GraphicalHero GraphicalHero--customers"> <div class="bui-Container"> <div class="GraphicalHero-artwork"> <img alt="" src="img/source/customers.svg"> </div> <div class="bui-GridContainer"> <div class="bui-Col-7@medium bui-u-pb--xlarge"> <h1 class="Text--xxlarge"> See what Uranus are&nbsp;developing </h1> <p class="Text--regular Text--regular--light bui-u-mb--large bui-u-pr--large"> Developing on the cloud all over the world <br>start from zero step by step with TeamUranus </p> </div> </div> </div></header>
+            <section class="bui-Section bui-Section--narrow">
+                <div class="bui-Container">
+                    <ul class="Home-logoList">
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/linux.svg' %}" />
+                        </li>
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/android.svg' %}" />
+                        </li>
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/windows.svg' %}" />
+                        </li>
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/paper-plane.svg' %}" />
+                        </li>
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/github.svg' %}" />
+                        </li>
+                        <li class="Home-logoListItem Home-logoListItem--gitlab">
+                            <img class="is-loaded" alt="" src="{% static 'img/item/overflowing.svg' %}" />
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <hr class="Rule--stout" %="">
+            <section class="bui-Section bui-Section--narrow">
+                <div class="bui-Container">
+                    <h2 class="Text--xlarge bui-u-mb--xlarge bui-u-textCenter LineLength LineLength--normal-big">
+                        Have a view of the products we can provide for you
+                    </h2>
+                    <ul class="bui-GridContainer bui-u-flexDeepMatch RichBoxList">
+                        <li class="bui-Col-4@medium">
+                            <a class="bui-Box bui-Box--clickable RichBoxList-itemContent" href="">
+                                <div class="RichBoxList-itemIcon">
+                                    <img class="is-loaded" alt="" src="{% static 'img/icon/power.svg' %}">
+                                </div>
+                                <h3 class="Text--smallish bui-u-mt--regular">Game Speeder based on udp</h3>
+                                <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
+                                    We are focusing on make a convenient,cheap and efficient universal game speeder
+                                    for every player,especially the students.At the same time,you can get rid of expensive
+                                    speeder cost.Just enjoy your game now with Uranus.
+                                </p>
+                                <div class="RichBoxList-itemLink bui-u-textMedium">
+                                    more info click here
+                                </div>
+                            </a>
+                        </li>
+                        <li class="bui-Col-4@medium">
+                            <a class="bui-Box bui-Box--clickable RichBoxList-itemContent" href="">
+                                <div class="RichBoxList-itemIcon">
+                                    <img class="is-loaded" alt="" src="{% static 'img/icon/magnifier.svg' %}">
+                                </div>
+                                <h3 class="Text--smallish bui-u-mt--regular">Advanced picture search</h3>
+                                <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
+                                    Some websites forbid search engine grasp some of thier infomation.Take Pixiv for example,only when
+                                    you become thier premium user can you explore the pictures by popularity.We try to provide a free engine
+                                    to get those hidden pictures.
+                                </p>
+                                <div class="RichBoxList-itemLink bui-u-textMedium">
+                                    more info click here
+                                </div>
+                            </a>
+                        </li>
+                        <li class="bui-Col-4@medium">
+                            <a class="bui-Box bui-Box--clickable RichBoxList-itemContent" href="">
+                                <div class="RichBoxList-itemIcon">
+                                    <img class="is-loaded" alt="" src="{% static 'img/icon/ssr.svg' %}">
+                                </div>
+                                <h3 class="Text--smallish bui-u-mt--regular">SSR service</h3>
+                                <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
+                                    In some countries ,DNS pollution is very common so that their citizens are seperated from the the world Internet
+                                    .By using proxy service,you can explore the Internet without any limit.When you are using this service,please obey
+                                    the law in your region.
+                                </p>
+                                <div class="RichBoxList-itemLink bui-u-textMedium">
+                                    more info click here
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="bui-Section bui-Section--panel bui-u-pb--xlarge">
+                <div class=bui-Container>
+                    <h2 class="Text--xlarge bui-u-textCenter">See What we are focusing now</h2>
+                    <p class="Text--regular bui-u-mb--xlarge bui-u-textCenter">explore the Uranus community,learn more and practice more</p>
+                </div>
+                <div class="bui-Container bui-Container--small">
+                    <div class=bui-GridContainer>
+                        <div class="bui-Col-4@medium">
+                            <nav>
+                                <ul class="bui-Tabs bui-Tabs--verticalList bui-u-mb--large" data-home-seamlessly-tabs data-pushstate-ignore>
+                                    <li class="bui-Tabs-listItem is-active" id="pj1">
+                                        <a href="#seamlessly-Deploy" data-home-seamlessly-tabs-trigger id="a1">web crawler </a>
+                                    </li>
+                                    <li class="bui-Tabs-listItem" id="pj2">
+                                        <a href="#seamlessly-Manage" data-home-seamlessly-tabs-trigger id="a2">server maintance</a>
+                                    </li>
+                                    <li class="bui-Tabs-listItem" id="pj3">
+                                        <a href="#seamlessly-Secure" data-home-seamlessly-tabs-trigger id="a3">Secure </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="bui-Col-8@medium">
+                            <div class=bui-Tabs-content>
+                                <div class="bui-Tabs-pane is-active" data-home-seamlessly-tabs-pane id="ct1">
+                                    <div class=bui-GridContainer>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/py.svg' %}" alt="" />
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/py.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">crawler based on py</h3>
+                                            <p>By using python,we are focusing on the pictures search.We are trying to improve the effect and efficient of our web crawler </p>
+                                        </div>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/hacker.svg' %}" alt="" />
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/hacker.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">Get something hidden</h3>
+                                            <p>Many website forbid usual search Engine to get the info of their content,such as pixiv.We are trying to use the account credential enumeration attack to
+                                            get some data(such as pictures) you want.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bui-Tabs-pane" data-home-seamlessly-tabs-pane id="ct2">
+                                    <div class=bui-GridContainer>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/bug.svg' %}" alt="" />
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/bug.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">Operation and Maintance</h3>
+                                            <p>Based on linux,our server is secured in some aspects.But we have to face with many attack form the public Internet.
+                                            We are making progress when we are involved in daily maintance.</p>
+                                        </div>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/maintance.svg' %}" alt="" />
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/maintance.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">Devloping more functions</h3>
+                                            <p>We are trying to achieve more functions to make our technical thoughts come ture.More functions are comming soon</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bui-Tabs-pane" data-home-seamlessly-tabs-pane id="ct3">
+                                    <div class=bui-GridContainer>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/firewall.svg' %}" alt=""  />
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/firewall.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">Cloud Firewalls </h3>
+                                            <p>Easily secure your infrastructure and instantly define what services are visible on all of our Droplets. </p>
+                                        </div>
+                                        <div class="bui-Col-6@small bui-u-mb--large">
+                                            <img src="{% static 'img/focusing/private.svg' %}" alt=""/>
+                                            <noscript>
+                                                <img src="{% static 'img/focusing/private.svg' %}" alt="" />
+                                            </noscript>
+                                            <h3 class="Text--smallish bui-u-mt--small">Private networking </h3>
+                                            <p>Enable communication between Droplets in the same datacenter. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="FooterCTA-container bui-u-mt--large"> <div class="bui-Container"> <div class="FooterCTA FooterCTA--slim"> <div class="FooterCTA-content"> <p class="Text--large bui-u-mb--remove"> Ready to get started with Uranus? </p> <p class="Text--regular bui-u-mt--small bui-u-mv--remove"> Creat an account in Uranus. </p> </div> <div class="FooterCTA-actions"> <a class="bui-Button bui-Button--primary bui-Button--withIconRight" href="signup/signup.html"> Sign Up <svg xmlns="http://www.w3.org/2000/svg" class="bui-Icon" aria-hidden="true"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right" /> </svg> </a> </div> </div> </div> </section>
+        </main>
+        <div class="bui SiteFrame-footer">
+            <footer class="GlobalFooter">
+                <div class="bui-Container">
+                    <h5 class="bui-u-mb--xlarge bui-u-textCenter LineLength LineLength--normal-big footer-text">
+                        Do somthing big with Team Uranus
+                    </h5>
+                    <a href="#"></a>
+                    <a href="#"></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <symbol viewBox="0 0 32 32" id=arrow-right xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.448 14.784L10.048.96c-.64-.64-1.856-.64-2.496 0-.32.32-.512.768-.512 1.28 0 .448.192.896.512 1.216l13.12 12.608-13.12 12.608c-.32.32-.512.704-.512 1.152 0 .32.128.64.448 1.088l.064.128c.32.32.768.512 1.216.512s.896-.192 1.216-.512L24.32 17.28c.32-.32.512-.768.512-1.216s-.064-.96-.384-1.28z" />
+            </symbol>
+        </svg>
+    </div>
+</div>
+

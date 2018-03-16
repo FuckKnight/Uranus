@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Uranus Login</title>
+    <style>
+        body {
+            font-family: "proxima-nova", "proxima nova", "helvetica neue", "helvetica", "arial", sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" media="screen" href="{% static 'css/login/Login.css' %}" />
+</head>
+<body class='login'>
+    <div class="bui-Container">
+        <img class="logo" height="50" src="{% static 'img/icon/uranuslogo.svg' %}" alt="Uranus logo" />
+        <form class="vertical-form sign-in" id="new_user" action="{% url 'E_Login' %}" accept-charset="UTF-8" method="post">
+            {% csrf_token %}
+            <legend>
+                Log In
+            </legend>
+            {% for error in warning %}
+            <p style="color:yellow;font-weight:bold;">{{error}}</p>
+            {%endfor%}
+            {% for error in conform %}
+            <p style="color:yellow;font-weight:bold;">{{error}}</p>
+            {%endfor%}
+            <input type="text" placeholder="Username" label="false" spellcheck="false" class="is-sensitive" value="" name="usrName" id="user_email" />
+            <input placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="usrPassword" id="user_password" />
+            <input type="submit" name="commit" value="Log In" />
+            <p>
+                <a href="{% url 'Forget' %}">Forgot password?</a>
+            </p>
+        </form>
+        <div class='footer'>
+            <p>
+                Don't have an account?
+                <a href="{% url 'Register' %}">Sign Up</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

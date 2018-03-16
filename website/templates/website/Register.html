@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Uranus Signup</title>
+    <style>
+        body {
+            font-family: "proxima-nova", "proxima nova", "helvetica neue", "helvetica", "arial", sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" media="screen" href="{% static 'css/signup/Register.css' %}" />
+</head>
+<body class='login'>
+    <div class="bui-Container">
+        <img class="logo" height="50" src="{% static 'img/icon/uranuslogo.svg' %}" alt="Uranus logo" />
+        <form class="vertical-form sign-in" id="new_user" action="{% url 'E_Register' %}" accept-charset="UTF-8" method="post">
+            {% csrf_token %}
+            <legend>
+                Sign Up
+            </legend>
+            {% for error in errors %}
+            <p style="color:yellow;font-weight:bold;">{{error}}</p>
+            {%endfor%}
+            <input type="email" placeholder="Email Address" label="false" spellcheck="false" class="is-sensitive" value="" name="email" id="user_email" required="required" />
+            <input type="text" placeholder="Username" autocomplete="off" spellcheck="false" class="is-sensitive" value="" name="usrName" id="user_nickname"  required="required"/>
+            <input placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="usrPassword" id="user_password"  required="required"/>
+            <input placeholder="Retype Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="subPassword" id="user_repassword" required="required" />
+            <input type="submit" name="commit" value="Sign Up" />
+            <p>
+                <a href="{% url 'Forget' %}"></a>
+            </p>
+        </form>
+        <div class='footer'>
+            <p>
+                Already have an account?
+                <a href="{% url 'Login' %}">Log In</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
