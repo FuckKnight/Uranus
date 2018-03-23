@@ -7,7 +7,8 @@ class UserProfile(models.Model):
     code = models.CharField(max_length=16)
     port = models.TextField(blank = True)
     domain = models.TextField(blank = True)
-    predic = models.DateField(default=timezone.now,editable=True)
+    begin = models.DateTimeField(auto_now = True)
+    end = models.DateTimeField(auto_now = False,editable = True,default=timezone.now)
     #nickName = models.CharField(max_length=20)
 
 

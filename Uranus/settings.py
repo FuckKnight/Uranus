@@ -12,10 +12,17 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import socket
 import os
 
-#if socket.get_hostname() == 'http://www.team-uranus.com':
+if socket._LOCALHOST == 'http://www.uracloud.com':
+    ALLOWED_HOSTS = ['www.team-uranus.com']
+    ADMINS = (('kun','1269754965@qq.com'))
+    DEBUG = TEMPLATE_DEBUG = False
+    DOMAIN = 'www.uracloud.com'
+else:
+    ALLOWED_HOSTS = []
+    DEBUG = TEMPLATE_DEBUG = True
+    DOMAIN = '127.0.0.1:8000'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -24,10 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f-64*#99i+=oc^7o+8f*veq5p-^3*1lqj=1lox$j@q+@wwaph#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = TEMPLATE_DEBUG = False
-ADMINS = (('kun','1269754965@qq.com'))
 
-ALLOWED_HOSTS = ['www.team-uranus.com']
 
 # Application definition
 

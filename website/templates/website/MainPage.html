@@ -1,7 +1,7 @@
 ﻿<!doctype html>
 {% load static%}
 <head>
-    <title></title>
+    <title>URAcloud</title>
     <meta charset=utf-8>
     <meta http-equiv=x-ua-compatible content="ie=edge">
     <meta name=viewport content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,7 @@
                 $("#discount").attr("style", "display:none")
             });
             $("#link").click(function () {
-                window.location="{% url 'GameSpeeder'%}"
+                window.location = "{% url 'GameSpeeder'%}"
             })
         })
     </script>
@@ -83,8 +83,10 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#loading").attr("style", "display:none;opacity:block");
-            $("#homepage").attr("style", "display:block")
+            setTimeout(function () {
+                $("#loading").attr("style", "display:none;opacity:block");
+                $("#homepage").attr("style", "display:block")
+            }, 5 * 1000)
         })
     </script>
     <script type="text/javascript">
@@ -196,33 +198,150 @@
         })
     </script>
 </head>
-<div id="loading" style="display:block; opacity: 1;">
+<div id="loading" style="display:block; opacity: 1">
+    <canvas style="position:absolute;z-index:-1"></canvas>
     <div id="preloader" style="opacity: 1;">
         <span></span>
         <span></span>
     </div>
 </div>
+<script>
+    var canvas = document.querySelector("canvas");
+    var c = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var mouse = {
+        x: canvas.width / 2,
+        y: canvas.height / 2
+    }
+
+    window.addEventListener("resize", function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    window.addEventListener("mousemove", function (e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    var colors = [
+        { r: 255, g: 71, b: 71 },
+        { r: 0, g: 206, b: 237 },
+        { r: 255, g: 255, b: 255 }
+    ];
+
+    function Particle(x, y, dx, dy, r, ttl) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.r = r;
+        this.opacity = 1;
+        this.shouldRemove = false;
+        this.timeToLive = ttl;
+        this.randomColor = Math.floor(Math.random() * colors.length);
+
+
+        this.update = function () {
+            this.x += this.dx
+            this.y += this.dy
+
+            if (this.x + this.r >= canvas.width || this.x - this.r <= 0)
+                this.dx = -this.dx
+
+            if (this.y + this.r >= canvas.height || this.y - this.r <= 0)
+                this.dy = -this.dy
+
+            // Ensure that particles cannot be spawned past canvas boundaries
+            this.x = Math.min(Math.max(this.x, 0 + this.r), canvas.width - this.r)
+            this.y = Math.min(Math.max(this.y, 0 + this.r), canvas.height - this.r)
+
+            c.beginPath()
+            c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false)
+            c.strokeStyle =
+                'rgba(' +
+                colors[this.randomColor].r +
+                ',' +
+                colors[this.randomColor].g +
+                ',' +
+                colors[this.randomColor].b +
+                ',' +
+                this.opacity +
+                ')'
+            c.fillStyle =
+                'rgba(' +
+                colors[this.randomColor].r +
+                ',' +
+                colors[this.randomColor].g +
+                ',' +
+                colors[this.randomColor].b +
+                ',' +
+                this.opacity +
+                ')'
+            c.stroke()
+            c.closePath()
+
+            this.opacity -= 1 / (ttl / 0.1)
+            this.r -= r / (ttl / 0.1)
+
+            if (this.r < 0) this.r = 0 // Thank you Akash for the conditional!
+
+            this.timeToLive -= 0.1
+        }
+
+
+        this.remove = function () {
+            // If timeToLive expires, return a true value.
+            // This signifies that the particle should be removed from the scene.
+            return this.timeToLive <= 0;
+        }
+    }
+
+    function Explosion(x, y) {
+        this.particles = [];
+
+        this.init = function () {
+            for (var i = 1; i <= 1; i++) {
+                var randomVelocity = {
+                    x: (Math.random() - 0.5) * 3.5,
+                    y: (Math.random() - 0.5) * 3.5,
+                }
+                this.particles.push(new Particle(x, y, randomVelocity.x, randomVelocity.y, 30, 8));
+            }
+        }
+
+        this.init();
+
+        this.draw = function () {
+            for (var i = 0; i < this.particles.length; i++) {
+                this.particles[i].update();
+
+                if (this.particles[i].remove() == true) {
+                    this.particles.splice(i, 1);
+                };
+            }
+        }
+    }
+
+    var explosions = [];
+
+    function animate() {
+        window.requestAnimationFrame(animate);
+
+        c.fillStyle = "#1e1e1e";
+        c.fillRect(0, 0, canvas.width, canvas.height);
+
+        explosions.push(new Explosion(mouse.x, mouse.y));
+
+        for (var i = 0; i < explosions.length; i++) {
+            explosions[i].draw();
+        }
+    }
+    animate();</script>
 <div class="index bui js-disabled" id="homepage" style="display:none">
-    <a href="#" class="bui-Banner bui-AnnouncementBanner" data-home-announcement data-home-announcement-cookie=alert_droplets_jan_2018 id="discount">
-        <div class=bui-Banner-content>
-            <span class="bui-Pill bui-Pill--new bui-u-mr--small">Discount</span>
-            <p data-home-announcement-message>
-                New <strong>Game Speeder plans</strong>
-                :lower delay,and lower price for new users. <strong id="link">Learn &nbsp;more</strong>
-                .
-            </p>
-        </div>
-        <button class="bui-Button--reset bui-Banner-close" type=button data-bui-banner-close id="close">
-            <svg class="bui-Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 212.982 212.982" style="enable-background:new 0 0 212.982 212.982;" xml:space="preserve" width="12px" height="12px">
-<g id="Close">
-            <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312   c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312   l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937   c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z" fill="#FFDA44" />
-
-
-
-</g>
-</svg>
-        </button>
-    </a>
     <div class="SiteFrame">
         <header class="GlobalHeader GlobalHeader--transparent" data-global-header role=banner id="desktop-header">
             <nav class=bui-Container role=navigation>
@@ -300,7 +419,7 @@
                     </li>
                     <li class="GlobalHeader-listItem GlobalHeader-listItem--extraSpace bui-Dropdown bui-Dropdown--left is-open" aria-haspopup=true aria-expanded=true>
                         <a href="#" class=GlobalHeader-link id="drop1" data-dropdown=true>
-                            Products
+                            子站链接
                             <img class="bui-Icon bui-Icon--small" src="{% static 'img/arrow-down.svg'%}">
                         </a>
                         <div class="bui-Dropdown-content bui-Dropdown-content--panel GlobalHeaderDropdown GlobalHeaderDropdown--products" id="menudown1" style="opacity:0;display:none;transform:matrix(0,0,0,0,0,0)">
@@ -313,7 +432,7 @@
                                             </div>
                                             <div class=IconLink-content>
                                                 <p class="Text--xsmall Text--xsmall--dark bui-u-mv--remove">Game Speeder</p>
-                                                <p class="Text--xsmall IconLink-contentDescription">cn2 advanced route,connect directly </p>
+                                                <p class="Text--xsmall IconLink-contentDescription">cn2/pccw advanced route,connect directly </p>
                                             </div>
                                         </div>
                                     </a>
@@ -360,12 +479,12 @@
 
                     <li class="GlobalHeader-listItem bui-Dropdown bui-Dropdown--left" aria-haspopup=true aria-expanded=false>
                         <a href="#" class=GlobalHeader-link data-dropdown=true id="drop2">
-                            Community
+                            URA社区
                             <img class="bui-Icon bui-Icon--small" src="{% static 'img/arrow-down.svg' %}">
                         </a>
                         <div class="bui-Dropdown-content bui-Dropdown-content--panel GlobalHeaderDropdown GlobalHeaderDropdown--community" id="menudown2">
                             <div class=GlobalHeaderDropdown-header>
-                                <p class="Text--smallish Text--smallish--dark bui-u-mb--xsmall">Join&Explore the Uranus Community </p>
+                                <p class="Text--smallish Text--smallish--dark bui-u-mb--xsmall">Join&Explore the Ura Community </p>
                                 <p class=GlobalHeaderDropdown-content>Don't think too much,just have fun with other developers </p>
                                 <p class="Text--xsmall Text--xsmall--dark bui-u-mb--remove">Find Yourself</p>
                             </div>
@@ -427,7 +546,7 @@
 
                     <li class="GlobalHeader-listItem bui-Dropdown bui-Dropdown--left" aria-haspopup=true aria-expanded=false>
                         <a href="#" class=GlobalHeader-link data-dropdown=true id="drop3">
-                            More Info
+                            更多信息
                             <img class="bui-Icon bui-Icon--small" src="{% static 'img/arrow-down.svg' %}">
                         </a>
                         <div class="bui-Dropdown-content bui-Dropdown-content--panel GlobalHeaderDropdown GlobalHeaderDropdown--support" style="display:none;opacity:0;transform:matrix(0,0,0,0,0,0)" id="menudown3">
@@ -439,7 +558,7 @@
                                                 <img src="{% static 'img/icon/support.svg' %}" alt="" />
                                             </div>
                                             <div class="IconLink-content IconLink-content">
-                                                <p class="Text--xsmall Text--xsmall--dark bui-u-mv--remove">Contact Support </p>
+                                                <p class="Text--xsmall Text--xsmall--dark bui-u-mv--remove">联系支持</p>
                                                 <p class="Text--xsmall IconLink-contentDescription"></p>
                                             </div>
                                         </div>
@@ -513,7 +632,7 @@
             <section class="bui-Section bui-Section--narrow">
                 <div class="bui-Container">
                     <h2 class="Text--xlarge bui-u-mb--xlarge bui-u-textCenter LineLength LineLength--normal-big">
-                        Have a view of the products we can provide for you
+                        Have a view of URA community
                     </h2>
                     <ul class="bui-GridContainer bui-u-flexDeepMatch RichBoxList">
                         <li class="bui-Col-4@medium">
@@ -521,11 +640,11 @@
                                 <div class="RichBoxList-itemIcon">
                                     <img class="is-loaded" alt="" src="{% static 'img/icon/power.svg' %}">
                                 </div>
-                                <h3 class="Text--smallish bui-u-mt--regular">Game Speeder based on udp</h3>
+                                <h3 class="Text--smallish bui-u-mt--regular">URA技术社区</h3>
                                 <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
-                                    We are focusing on make a convenient,cheap and efficient universal game speeder
-                                    for every player,especially the students.At the same time,you can get rid of expensive
-                                    speeder cost.Just enjoy your game now with Uranus.
+                                    我们致力于建设一个没有门槛的技术社区，无论是萌新还是大佬都能在其中找到有用的ideas。
+                                    只要有技术的想法，就可以在URA社区平台上进行学习实践。同时，URAcommunity是一个自我管理的
+                                    开源社区，我们不做过多干预，既可以享受资源，也可以贡献力量。与github较高的门槛不同的是，这个技术社区是没有方向性限制的，任何实用技术在这里都是欢迎的，
                                 </p>
                                 <div class="RichBoxList-itemLink bui-u-textMedium">
                                     more info click here
@@ -537,11 +656,10 @@
                                 <div class="RichBoxList-itemIcon">
                                     <img class="is-loaded" alt="" src="{% static 'img/icon/magnifier.svg' %}">
                                 </div>
-                                <h3 class="Text--smallish bui-u-mt--regular">Advanced picture search</h3>
+                                <h3 class="Text--smallish bui-u-mt--regular">URAcloud产品与服务</h3>
                                 <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
-                                    Some websites forbid search engine grasp some of thier infomation.Take Pixiv for example,only when
-                                    you become thier premium user can you explore the pictures by popularity.We try to provide a free engine
-                                    to get those hidden pictures.
+                                  与一般意义上的产品与服务不同，URAcloud产品与服务并不完全是有Uranus运营团队所提供的，任何有技术想法或者具有成熟项目的人或者团队都可以在这里发布产品与服务
+                                    我们将会提供等相应资源以及帮您寻找合作者，选择独立发布与合作发布是完全自由的。
                                 </p>
                                 <div class="RichBoxList-itemLink bui-u-textMedium">
                                     more info click here
@@ -553,11 +671,10 @@
                                 <div class="RichBoxList-itemIcon">
                                     <img class="is-loaded" alt="" src="{% static 'img/icon/ssr.svg' %}">
                                 </div>
-                                <h3 class="Text--smallish bui-u-mt--regular">SSR service</h3>
+                                <h3 class="Text--smallish bui-u-mt--regular">URA projectX</h3>
                                 <p class="bui-u-mt--small bui-u-pb--regular RichBoxList-itemDescription">
-                                    In some countries ,DNS pollution is very common so that their citizens are seperated from the the world Internet
-                                    .By using proxy service,you can explore the Internet without any limit.When you are using this service,please obey
-                                    the law in your region.
+                                   类似于github，我们也提供一个发布开源项目的平台，任何人都可以对该工程做出贡献，你可以在URA projectX中找到合作者以及借助大众的力量来完善项目或工程。
+                                   我们也会提供托管服务。任何能实现实际效益的工程或项目都是受欢迎的，我们不会对内容作过多要求。无论是硬件还是软件，都可以发布项目，使用开源的力量完善并实现技术想法
                                 </p>
                                 <div class="RichBoxList-itemLink bui-u-textMedium">
                                     more info click here
@@ -567,161 +684,14 @@
                     </ul>
                 </div>
             </section>
-            <section class="bui-Section bui-Section--panel bui-u-pb--xlarge">
-                <div class=bui-Container>
-                    <h2 class="Text--xlarge bui-u-textCenter">See What we are focusing now</h2>
-                    <p class="Text--regular bui-u-mb--xlarge bui-u-textCenter">explore the Uranus community,learn more and practice more</p>
-                </div>
-                <div class="bui-Container bui-Container--small">
-                    <div class=bui-GridContainer>
-                        <div class="bui-Col-4@medium">
-                            <nav>
-                                <ul class="bui-Tabs bui-Tabs--verticalList bui-u-mb--large" data-home-seamlessly-tabs data-pushstate-ignore>
-                                    <li class="bui-Tabs-listItem is-active" id="pj1">
-                                        <a href="#seamlessly-Deploy" data-home-seamlessly-tabs-trigger id="a1">web crawler </a>
-                                    </li>
-                                    <li class="bui-Tabs-listItem" id="pj2">
-                                        <a href="#seamlessly-Manage" data-home-seamlessly-tabs-trigger id="a2">server maintance</a>
-                                    </li>
-                                    <li class="bui-Tabs-listItem" id="pj3">
-                                        <a href="#seamlessly-Secure" data-home-seamlessly-tabs-trigger id="a3">Secure </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="bui-Col-8@medium">
-                            <div class=bui-Tabs-content>
-                                <div class="bui-Tabs-pane is-active" data-home-seamlessly-tabs-pane id="ct1">
-                                    <div class=bui-GridContainer>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/py.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/py.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">crawler based on py</h3>
-                                            <p>By using python,we are focusing on the pictures search.We are trying to improve the effect and efficient of our web crawler </p>
-                                        </div>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/hacker.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/hacker.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">Get something hidden</h3>
-                                            <p>
-                                                Many website forbid usual search Engine to get the info of their content,such as pixiv.We are trying to use the account credential enumeration attack to
-                                                get some data(such as pictures) you want.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bui-Tabs-pane" data-home-seamlessly-tabs-pane id="ct2">
-                                    <div class=bui-GridContainer>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/bug.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/bug.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">Operation and Maintance</h3>
-                                            <p>
-                                                Based on linux,our server is secured in some aspects.But we have to face with many attack form the public Internet.
-                                                We are making progress when we are involved in daily maintance.
-                                            </p>
-                                        </div>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/maintance.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/maintance.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">Devloping more functions</h3>
-                                            <p>We are trying to achieve more functions to make our technical thoughts come ture.More functions are comming soon</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bui-Tabs-pane" data-home-seamlessly-tabs-pane id="ct3">
-                                    <div class=bui-GridContainer>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/firewall.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/firewall.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">Cloud Firewalls </h3>
-                                            <p>Easily secure your infrastructure and instantly define what services are visible on all of our Droplets. </p>
-                                        </div>
-                                        <div class="bui-Col-6@small bui-u-mb--large">
-                                            <img src="{% static 'img/focusing/private.svg' %}" alt="" />
-                                            <noscript>
-                                                <img src="{% static 'img/focusing/private.svg' %}" alt="" />
-                                            </noscript>
-                                            <h3 class="Text--smallish bui-u-mt--small">Private networking </h3>
-                                            <p>Enable communication between Droplets in the same datacenter. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="bui-Section bui-u-pb--xlarge" id="plan-scroll">
-                <div class=bui-Container>
-                    <h2 class="Text--xlarge bui-u-textCenter">Ready to get started with Uranus?Choose a plan you prefer.</h2>
-                    <div class="bui-GridContainer bui-GridContainer-largeGutter@medium bui-u-pt--xlarge bui-u-pb--xlarge bui-u-flexMiddle@medium bui-u-flexMiddleOverride">
-                        <ul class="bui-Tabs bui-Tabs-list bui-Tabs-list--centered" data-bui-tabs-api-terminal="" data-pushstate-ignore="">
-                            <li class="bui-u-mr--large is-active" id="bt1">
-                                <a href="#ruby-tab" data-bui-tabs-api-terminal-trigger="" aria-selected="true">Lightweight</a>
-                            </li>
-                            <li class="bui-u-mr--large" id="bt2">
-                                <a href="#curl-tab" data-bui-tabs-api-terminal-trigger="">Advanced</a>
-                            </li>
-                            <li class="bui-u-mr--large" id="bt3">
-                                <a href="#go-tab" data-bui-tabs-api-terminal-trigger="">Flexible</a>
-                            </li>
-                            <li id="bt4" class="bui-u-mr--large">
-                                <a href="#doctl-tab" data-bui-tabs-api-terminal-trigger="">DIY Mode</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="bui-Container" id="plancontent1" style="display:block">
-                    <div class="plan-bg bgp1">
-                        <h1>Lightweight Plan</h1>
-                        <img src="{% static 'img/source/floating-ips.svg' %}" />
-                        <p>Start your game speeder in a lightweight scale.Only 100 RMB for a whole year</p>
-                        <a class="bui-Button--bottom bui-Button--primary bui-Button--withIconRight planlink" href="">Take this plan now</a>
-                    </div>
-                </div>
-                <div class="bui-Container" id="plancontent2" style="display:none">
-                    <div class="plan-bg bgp2">
-                        <h1>Advanced Plan</h1>
-                        <img src="{% static 'img/source/block-storage.svg' %}" />
-                        <p>Start your game speeder in a advanced scale.Enjoy your VIP priority with 25RMB per month </p>
-                        <a class="bui-Button--bottom bui-Button--primary bui-Button--withIconRight planlink" href="">Take this plan now</a>
-                    </div>
-                </div>
-                <div class="bui-Container" id="plancontent3" style="display:none">
-                    <div class="plan-bg bgp3">
-                        <h1>Flexible Plan</h1>
-                        <img src="{% static 'img/source/load-balancers.svg' %}" />
-                        <p>Start your game speeder in a lightweight scale.The price is as low as 15RMB per month</p>
-                        <a class="bui-Button--bottom bui-Button--primary bui-Button--withIconRight planlink" href="">Take this plan now</a>
-                    </div>
-                </div>
-                <div class="bui-Container" id="plancontent4" style="display:none">
-                    <div class="plan-bg bgp4">
-                        <h1>DIY Mode Plan</h1>
-                        <img src="{% static 'img/source/diy.png' %}" />
-                        <p>You can DIY your speeder server or crowd-funding with others,we will deploy it for you.Just enjoy your game!The price depends on your sever scale</p>
-                        <a class="bui-Button--bottom bui-Button--primary bui-Button--withIconRight planlink" href="">Take this plan now</a>
-                    </div>
-                </div>
-            </section>
-            <section class="FooterCTA-container bui-u-mt--large"> <div class="bui-Container"> <div class="FooterCTA FooterCTA--slim"> <div class="FooterCTA-content"> <p class="Text--large bui-u-mb--remove"> Ready to get started with Uranus? </p> <p class="Text--regular bui-u-mt--small bui-u-mv--remove"> Creat an account in Uranus. </p> </div> <div class="FooterCTA-actions"> <a class="bui-Button bui-Button--primary bui-Button--withIconRight" href="{% url 'Register' %}"> Sign Up <svg xmlns="http://www.w3.org/2000/svg" class="bui-Icon" aria-hidden="true"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right" /> </svg> </a> </div> </div> </div> </section>
+           
+            <section class="FooterCTA-container bui-u-mt--large"> <div class="bui-Container"> <div class="FooterCTA FooterCTA--slim"> <div class="FooterCTA-content"> <p class="Text--large bui-u-mb--remove"> Ready to get started with Uranus? </p> <p class="Text--regular bui-u-mt--small bui-u-mv--remove"> Create an account in Uranus. </p> </div> <div class="FooterCTA-actions"> <a class="bui-Button bui-Button--primary bui-Button--withIconRight" href="{% url 'Register' %}"> Sign Up <svg xmlns="http://www.w3.org/2000/svg" class="bui-Icon" aria-hidden="true"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right" /> </svg> </a> </div> </div> </div> </section>
         </main>
         <div class="bui SiteFrame-footer">
             <footer class="GlobalFooter">
                 <div class="bui-Container">
                     <h5 class="bui-u-mb--xlarge bui-u-textCenter LineLength LineLength--normal-big footer-text">
-                        Do somthing big with Team Uranus
+                        Do somthing Awsome with Team Uranus
                     </h5>
                     <a href="#"></a>
                     <a href="#"></a>

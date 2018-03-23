@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import time
+import time,traceback
 import datetime
 from .Token import Token
 from random import randint
@@ -35,7 +35,7 @@ def Login(request):
 
 #登陆处理
 def E_Login(request):
-    warning = []
+    errors = []
     try:
         if request.method == 'POST':
             form = LoginMassage(request.POST)
@@ -44,16 +44,16 @@ def E_Login(request):
                 usrPassword = form.cleaned_data['usrPassword']
                 user = authenticate(username = usrName,password = usrPassword)
                 if user == None:
-                    warning.append('用户名/密码错误')
-                    return render(request,'website/Login.html',{'warning':warning})
+                    errors.append('用户名/密码错误')
+                    return render(request,'website/Login.html',{'errors':errors})
                 else:
                     login(request,user)
                     return HttpResponseRedirect('R_FuncPage')
         else:
             form = LoginMassage()
     except Exception as e:
-        warning.append(str(e))
-    return render(request,'website/Login.html',{'warning':warning})
+        errors.append(str(e))
+    return render(request,'website/Login.html',{'errors':errors})
 
 #登出
 def Logout(request):
@@ -82,6 +82,8 @@ def E_Register(request):
                 errors.extend(registerForm.errors.values())
                 return render(request,'website/Register.html',
             context=({'curtime':curtime,'usrName':usrName,'email':email,'errors':errors}))
+            if len(usrPassword)<6 and not usrPassword.isdigit():
+                errors.append('密码强度不够，至少六位密码，且不能全为数字')
             if usrPassword != subPassword:
                 errors.append('两次输入的密码不一致！')
                 return render(request,'website/Register.html',
@@ -117,7 +119,8 @@ def E_Register(request):
             #profile.nickName = nickName
             profile.save()
             
-            return HttpResponseRedirect('Email?id=%d'%user.id)
+            Email(user.id)
+            return HttpResponse(u'请登陆注册邮箱中验证账户，有效期1小时')
 #对异常的处理
     except Exception as e:
         errors.append(str(e))
@@ -125,8 +128,7 @@ def E_Register(request):
     context=({'curtime':curtime,'usrName':usrName,'email':email,'errors':errors}))
     return render(request,'website/Register.html')
 
-def Email(request):
-    id = request.GET.get('id')
+def Email(id):
     email = User.objects.get(id = id).email
     username = User.objects.get(id = id).username
     token = token_confirm.generate_validate_token(username)
@@ -135,7 +137,6 @@ def Email(request):
     '/'.join([Uranus.settings.DOMAIN,'E_Email',token])
     ])
     send_mail(u'This letter is from uranus',message,Uranus.settings.EAMIL_FROM,[email])
-    return HttpResponse(u'请登陆注册邮箱中验证账户，有效期1小时')
 
 def E_Email(request,token):
     try:
@@ -148,8 +149,8 @@ def E_Email(request,token):
         return HttpResponse(u'对不起，您所验证的用户不存在，请重新注册')
     user.is_active = True
     user.save()
-    conform = u'验证成功，请进行登陆操作'
-    return render(request,'website/Login.html',{'conform':conform})
+    errors = u'验证成功，请进行登陆操作'
+    return render(request,'website/Login.html',{'errors':errors})
 ########################################################################################
 def Forget(request):
     return render(request,'website/Forget.html')
@@ -196,7 +197,12 @@ def R_FuncPage(request):
         userpro = UserProfile.objects.get(user_id=pk)
         port = userpro.port
         domain = userpro.domain
-        time = userpro.predic
+        userpro.begin=datetime.datetime.now
+        userpro.save()
+        if userpro.begin>userpro.end :
+            userpro.end=userpro.begin
+        time = str((userpro.begin-userpro.end))
+        userpro.save()
         contacts=[port,time,domain]
         return render(request,'website/R_FuncPage.html',{'contacts':contacts})
     else:

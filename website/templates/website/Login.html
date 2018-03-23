@@ -18,12 +18,9 @@
             <legend>
                 Log In
             </legend>
-            {% for error in warning %}
-            <p style="color:yellow;font-weight:bold;">{{error}}</p>
-            {%endfor%}
-            {% for error in conform %}
-            <p style="color:yellow;font-weight:bold;">{{error}}</p>
-            {%endfor%}
+            {% if errors %}
+            <p style="color:yellow;font-weight:bold;">{{errors}}</p>
+            {%endif%}
             <input type="text" placeholder="Username" label="false" spellcheck="false" class="is-sensitive" value="" name="usrName" id="user_email" />
             <input placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password" name="usrPassword" id="user_password" />
             <input type="submit" name="commit" value="Log In" />
