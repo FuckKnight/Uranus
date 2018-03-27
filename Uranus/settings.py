@@ -12,15 +12,15 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import socket
 import os
 
-if socket._LOCALHOST == 'http://www.uracloud.com':
-    ALLOWED_HOSTS = ['www.team-uranus.com']
-    ADMINS = (('kun','1269754965@qq.com'))
-    DEBUG = TEMPLATE_DEBUG = False
-    DOMAIN = 'www.uracloud.com'
-else:
+if socket._LOCALHOST == '127.0.0.1':
     ALLOWED_HOSTS = []
     DEBUG = TEMPLATE_DEBUG = True
     DOMAIN = '127.0.0.1:8000'
+else:
+    ALLOWED_HOSTS = ['www.team-uranus.com']
+    ADMINS = (('kun','1269754965@qq.com'))
+    DEBUG = TEMPLATE_DEBUG = False
+    DOMAIN = 'www.team-uranus.com'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
